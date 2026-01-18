@@ -1,0 +1,68 @@
+# =============================================================================
+# E-commerce Admin - Development Dockerfile
+# Hot-reload enabled for local development
+# =============================================================================
+
+FROM php:8.2-fpm-alpine
+
+# Install system dependencies
+RUN apk add --no-cache \
+    bash \
+    curl \
+    git \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libzip-dev \
+    icu-dev \
+    oniguruma-dev \
+    postgresql-dev \
+    sqlite-dev \
+    nodejs \
+    npm \
+    && rm -rf /var/cache/apk/*
+
+# Install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        pdo_pgsql \
+        pdo_mysql \
+        pdo_sqlite \
+        pgsql \
+        gd \
+        zip \
+        intl \
+        mbstring \
+        opcache \
+        bcmath \
+        pcntl
+
+# Install Composer
+COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
+
+# Install Xdebug for debugging
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug \
+    && apk del $PHPIZE_DEPS
+
+# Xdebug configuration
+RUN echo "xdebug.mode=develop,debug,coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_host=host.docker" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.client_port=9003" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+# PHP configuration for development
+RUN echo "memory_limit=512M" >> /usr/local/etc/php/conf.d/docker.ini \
+    && echo "upload_max_filesize=64M" >> /usr/local/etc/php/conf.d/docker.ini \
+    && echo "post_max_size=64M" >> /usr/local/etc/php/conf.d/docker.ini \
+    && echo "max_execution_time=300" >> /usr/local/etc/php/conf.d/docker.ini \
+    && echo "display_errors=On" >> /usr/local/etc/php/conf.d/docker.ini \
+    && echo "error_reporting=E_ALL" >> /usr/local/etc/php/conf.d/docker.ini
+
+WORKDIR /var/www/html
+
+# Expose ports (PHP-FPM + Vite)
+EXPOSE 9000 5173
+
+CMD ["php-fpm"]

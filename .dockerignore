@@ -1,0 +1,64 @@
+# =============================================================================
+# Docker Ignore
+# Files and folders to exclude from Docker build context
+# =============================================================================
+
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Dependencies (installed during build)
+node_modules
+vendor
+
+# Build artifacts (built during build)
+public/build
+public/hot
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs and cache
+storage/logs/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+!storage/logs/.gitkeep
+!storage/framework/cache/.gitkeep
+!storage/framework/sessions/.gitkeep
+!storage/framework/views/.gitkeep
+
+# Testing
+tests
+phpunit.xml
+.phpunit.result.cache
+coverage
+
+# Documentation
+*.md
+!README.md
+docs
+
+# Docker files (not needed inside container)
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# Misc
+*.log
+*.sql
+*.bak
+.DS_Store
+Thumbs.db

@@ -1,0 +1,39 @@
+# PHP and Node.js versions
+[providers.php]
+version = "8.2"
+# Ensure required PHP extensions are present in the build image
+extensions = [
+    "pdo_pgsql",
+    "pgsql",
+    "pdo_sqlite",
+    "sqlite3"
+]
+
+[providers.node]
+version = "18"
+
+# Setup phase
+[phases.setup]
+dependsOn = ["install"]
+cmds = [
+    "chmod +x start.sh"
+]
+
+# Build phase - install dependencies and build assets
+[phases.build]
+dependsOn = ["setup"] 
+cmds = [
+    # Clear old cache files first
+    "rm -f bootstrap/cache/services.php bootstrap/cache/packages.php bootstrap/cache/config.php",
+    # Install PHP dependencies for production
+    "composer install --no-dev --no-scripts --optimize-autoloader --no-interaction",
+    # Rebuild autoloader without dev dependencies
+    "composer dump-autoload --optimize --classmap-authoritative --no-dev",
+    # Install and build frontend assets (include dev deps for Vite)
+    "npm ci",
+    "npm run build"
+]
+
+# Start command
+[start]
+cmd = "npm --version || true && chmod +x start.sh && ./start.sh"
