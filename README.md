@@ -63,8 +63,8 @@
 
 ```bash
 # Clone & start em 30 segundos
-git clone https://github.com/josuekuhim/ecommerce-admin.git
-cd ecommerce-admin
+git clone https://github.com/josuekuhim/ecom-admin-panel.git
+cd ecom-admin-panel
 make install && make up
 ```
 
