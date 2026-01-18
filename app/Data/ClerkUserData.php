@@ -23,7 +23,7 @@ final readonly class ClerkUserData
         $primaryEmail = collect($clerkUser->emailAddresses ?? [])
             ->firstWhere('id', $clerkUser->primaryEmailAddressId);
 
-        $email = $primaryEmail?->emailAddress ?? '';
+        $email = $primaryEmail->emailAddress ?? '';
 
         return new self(
             id: $clerkUser->id,
