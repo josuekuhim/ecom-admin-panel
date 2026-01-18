@@ -107,7 +107,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => env('DB_SSLMODE', 'require'),
+            'sslmode' => env('DB_SSLMODE', 'prefer'),
             'channel_binding' => env('DB_CHANNEL_BINDING', 'require'),
             'options' => extension_loaded('pdo_pgsql') ? array_filter([
                 PDO::PGSQL_ATTR_DISABLE_PREPARES => true,

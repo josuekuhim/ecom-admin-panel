@@ -142,6 +142,9 @@ jobs:
           DB_USERNAME: ecommerce
           DB_PASSWORD: secret
           PGSSLMODE: disable
+        run: |
+          php artisan config:clear
+          php artisan test
 
       - name: Upload coverage to Codecov
         if: matrix.php == '8.2'
