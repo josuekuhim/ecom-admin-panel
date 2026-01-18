@@ -6,6 +6,5 @@ parameters:
     paths:
         - app
     ignoreErrors: []
-    checkMissingIterableValueType: false
     inferPrivatePropertyTypeFromConstructor: true
     treatPhpDocTypesAsCertain: false
