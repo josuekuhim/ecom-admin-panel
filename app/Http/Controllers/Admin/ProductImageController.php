@@ -111,6 +111,7 @@ class ProductImageController extends Controller
 
         // Update image_url with the API endpoint
         if ($imageRecord) {
+            assert($imageRecord instanceof \App\Models\ProductImage);
             $imageRecord->update([
                 'image_url' => url("/api/images/product/{$imageRecord->id}")
             ]);

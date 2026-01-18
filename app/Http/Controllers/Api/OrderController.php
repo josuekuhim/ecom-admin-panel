@@ -42,6 +42,8 @@ class OrderController extends Controller
             return response()->json(['message' => 'Not found'], 404);
         }
 
+        assert($owned instanceof \App\Models\Order);
+
         $this->authorize('view', $owned);
 
     Log::info('Order show success', [
@@ -89,6 +91,8 @@ class OrderController extends Controller
                 'total_amount' => $totalAmount,
                 'status' => 'pending',
             ], $validated));
+
+            assert($order instanceof \App\Models\Order);
 
             Log::info('Order created', [
                 'order_id' => $order->id,

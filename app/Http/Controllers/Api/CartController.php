@@ -36,6 +36,7 @@ class CartController extends Controller
         $cartItem = $cart->items()->where('product_variant_id', $request->validated('product_variant_id'))->first();
 
         if ($cartItem) {
+            assert($cartItem instanceof \App\Models\CartItem);
             $cartItem->quantity += $request->validated('quantity');
             $cartItem->save();
         } else {

@@ -4,8 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
+/**
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\DropImage> $images
+ * @property-read int $products_count
+ * @property-read int $images_count
+ */
 class Drop extends Model
 {
     use HasFactory;
@@ -17,12 +24,12 @@ class Drop extends Model
         'available',
     ];
 
-    public function products()
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }
 
-    public function images()
+    public function images(): HasMany
     {
         return $this->hasMany(DropImage::class);
     }

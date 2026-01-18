@@ -3,8 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
+/**
+ * @property-read \App\Models\Drop $drop
+ */
 class DropImage extends Model
 {
     // Use a dedicated SQLite connection for images
@@ -20,7 +24,7 @@ class DropImage extends Model
         'alt_text',
     ];
 
-    public function drop()
+    public function drop(): BelongsTo
     {
         return $this->belongsTo(Drop::class);
     }

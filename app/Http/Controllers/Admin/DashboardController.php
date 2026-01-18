@@ -61,8 +61,8 @@ class DashboardController extends Controller
             'active_carts' => $activeCarts,
             'abandoned_carts' => $abandonedCarts,
             // Storefront specific stats
-            'storefront_enabled' => env('STOREFRONT_ENABLED', true),
-            'storefront_url' => env('STOREFRONT_URL', ''),
+            'storefront_enabled' => config('app.storefront_enabled', true),
+            'storefront_url' => config('app.storefront_url', ''),
         ];
 
         // --- Sales Chart Data ---

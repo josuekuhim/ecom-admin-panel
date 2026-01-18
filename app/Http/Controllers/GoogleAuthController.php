@@ -106,8 +106,8 @@ class GoogleAuthController extends Controller
                     'total_orders' => $user->getOrdersCount(),
                     'total_spent' => $user->getTotalOrdersValue(),
                     'cart_items_count' => $cart->items()->count(),
-                    'first_login' => $user->first_login_at?->diffForHumans(),
-                    'last_login' => $user->last_login_at?->diffForHumans(),
+                    'first_login' => $user->first_login_at ? \Carbon\Carbon::parse($user->first_login_at)->diffForHumans() : null,
+                    'last_login' => $user->last_login_at ? \Carbon\Carbon::parse($user->last_login_at)->diffForHumans() : null,
                 ],
                 'access_token' => $token,
                 'token_type' => 'Bearer',
@@ -168,8 +168,8 @@ class GoogleAuthController extends Controller
                     'total_orders' => $user->getOrdersCount(),
                     'total_spent' => $user->getTotalOrdersValue(),
                     'cart_items_count' => $cart->items()->count(),
-                    'first_login' => $user->first_login_at?->diffForHumans(),
-                    'last_login' => $user->last_login_at?->diffForHumans(),
+                    'first_login' => $user->first_login_at ? \Carbon\Carbon::parse($user->first_login_at)->diffForHumans() : null,
+                    'last_login' => $user->last_login_at ? \Carbon\Carbon::parse($user->last_login_at)->diffForHumans() : null,
                 ]
             ]);
 

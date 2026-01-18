@@ -129,7 +129,7 @@
                                         </a>
                                     </td>
                                     <td><span class="badge bg-primary">{{ $product->variants_count }}</span></td>
-                                    <td><span class="badge bg-info">{{ $product->images_count }}</span></td>
+                                    <td><span class="badge bg-info">{{ $product->computed_images_count ?? $product->images_count }}</span></td>
                                     <td>
                                         <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-xs btn-outline-primary">Editar</a>
                                     </td>

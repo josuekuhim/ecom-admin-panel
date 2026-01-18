@@ -39,7 +39,7 @@ class ProductController extends Controller
                 ->pluck('aggregate', 'product_id');
 
             $products->getCollection()->transform(function ($product) use ($imageCounts) {
-                $product->images_count = (int)($imageCounts[$product->id] ?? 0);
+                $product->setAttribute('computed_images_count', (int)($imageCounts[$product->id] ?? 0));
                 return $product;
             });
         }
@@ -108,6 +108,7 @@ class ProductController extends Controller
                     ]);
 
                     if ($imageRecord) {
+                        assert($imageRecord instanceof \App\Models\ProductImage);
                         $imageRecord->update([
                             'image_url' => url("/api/images/product/{$imageRecord->id}")
                         ]);
@@ -187,6 +188,7 @@ class ProductController extends Controller
                         }
                     } else {
                         $newVariant = $product->variants()->create($variantData);
+                        assert($newVariant instanceof \App\Models\ProductVariant);
                         $incomingVariantIds[] = $newVariant->id;
                     }
                 }
@@ -215,6 +217,7 @@ class ProductController extends Controller
                         ]);
 
                         if ($imageRecord) {
+                            assert($imageRecord instanceof \App\Models\ProductImage);
                             $imageRecord->update([
                                 'image_url' => url("/api/images/product/{$imageRecord->id}")
                             ]);

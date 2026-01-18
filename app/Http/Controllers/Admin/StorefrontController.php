@@ -44,7 +44,7 @@ class StorefrontController extends Controller
                 ->pluck('aggregate', 'product_id');
 
             $topProducts->transform(function ($p) use ($imageCounts) {
-                $p->images_count = (int)($imageCounts[$p->id] ?? 0);
+                $p->setAttribute('computed_images_count', (int)($imageCounts[$p->id] ?? 0));
                 return $p;
             });
         }
@@ -61,10 +61,10 @@ class StorefrontController extends Controller
     public function settings()
     {
         $settings = [
-            'storefront_url' => env('STOREFRONT_URL', ''),
-            'storefront_enabled' => env('STOREFRONT_ENABLED', true),
-            'maintenance_mode' => env('STOREFRONT_MAINTENANCE', false),
-            'api_rate_limit' => env('API_RATE_LIMIT', 60),
+            'storefront_url' => config('app.storefront_url', ''),
+            'storefront_enabled' => config('app.storefront_enabled', true),
+            'maintenance_mode' => config('app.storefront_maintenance', false),
+            'api_rate_limit' => config('app.api_rate_limit', 60),
         ];
 
         return view('admin.storefront.settings', compact('settings'));

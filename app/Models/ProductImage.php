@@ -3,8 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
+/**
+ * @property-read \App\Models\Product $product
+ */
 class ProductImage extends Model
 {
     // Use a dedicated SQLite connection for images
@@ -20,7 +24,7 @@ class ProductImage extends Model
         'alt_text',
     ];
 
-    public function product()
+    public function product(): BelongsTo
     {
         // Product belongs to a Postgres model; ensure foreign keys are logical only (no FK constraints across DBs)
         return $this->belongsTo(Product::class);

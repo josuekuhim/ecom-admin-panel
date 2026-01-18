@@ -37,7 +37,7 @@ class CustomerResource extends JsonResource
     public function withFullProfile(): array
     {
         return array_merge($this->toArray(request()), [
-            'birth_date' => $this->resource->birth_date?->format('Y-m-d'),
+            'birth_date' => $this->resource->birth_date ? \Carbon\Carbon::parse($this->resource->birth_date)->format('Y-m-d') : null,
             'gender' => $this->resource->gender,
             'address' => $this->resource->address,
             'address_number' => $this->resource->address_number,
@@ -52,8 +52,8 @@ class CustomerResource extends JsonResource
             'document_type' => $this->resource->document_type,
             'document_number' => $this->resource->document_number,
             'full_address' => $this->resource->full_address,
-            'first_login_at' => $this->resource->first_login_at?->toISOString(),
-            'last_login_at' => $this->resource->last_login_at?->toISOString(),
+            'first_login_at' => $this->resource->first_login_at ? \Carbon\Carbon::parse($this->resource->first_login_at)->toISOString() : null,
+            'last_login_at' => $this->resource->last_login_at ? \Carbon\Carbon::parse($this->resource->last_login_at)->toISOString() : null,
         ]);
     }
 
@@ -63,7 +63,7 @@ class CustomerResource extends JsonResource
     public function withAuthContext(): array
     {
         return array_merge($this->toArray(request()), [
-            'is_new_customer' => $this->resource->first_login_at?->isToday() ?? false,
+            'is_new_customer' => $this->resource->first_login_at ? \Carbon\Carbon::parse($this->resource->first_login_at)->isToday() : false,
         ]);
     }
 }

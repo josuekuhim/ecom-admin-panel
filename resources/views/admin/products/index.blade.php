@@ -43,7 +43,7 @@
                             <span class="badge bg-primary">{{ $product->variants_count }}</span>
                         </td>
                         <td>
-                            <span class="badge bg-info">{{ $product->images_count }}</span>
+                            <span class="badge bg-info">{{ $product->computed_images_count ?? $product->images_count }}</span>
                         </td>
                         <td>{{ $product->created_at->format('d/m/Y H:i') }}</td>
                         <td>

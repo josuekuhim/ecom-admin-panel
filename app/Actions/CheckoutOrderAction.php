@@ -43,6 +43,8 @@ final class CheckoutOrderAction
             throw new OrderNotFoundException('Order not found');
         }
 
+        assert($order instanceof \App\Models\Order);
+
         if ($order->status !== OrderStatus::Pending->value) {
             throw new OrderAlreadyProcessedException('Order already processed');
         }

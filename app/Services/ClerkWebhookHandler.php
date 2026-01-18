@@ -108,7 +108,7 @@ class ClerkWebhookHandler
                 'customer_id' => $customer->id,
                 'clerk_user_id' => $clerkUserId,
                 'event' => 'session.created',
-                'is_new_customer' => $customer->first_login_at && $customer->first_login_at->isToday()
+                'is_new_customer' => $customer->first_login_at && \Carbon\Carbon::parse($customer->first_login_at)->isToday()
             ]);
         } else {
             Log::error('Failed to handle customer session via webhook.', [

@@ -63,6 +63,7 @@ class DropController extends Controller
             ]);
 
             if ($imageRecord) {
+                assert($imageRecord instanceof \App\Models\DropImage);
                 $imageRecord->update([
                     'image_url' => url("/api/images/drop/{$imageRecord->id}")
                 ]);
@@ -127,6 +128,7 @@ class DropController extends Controller
             ]);
 
             if ($imageRecord) {
+                assert($imageRecord instanceof \App\Models\DropImage);
                 $imageRecord->update([
                     'image_url' => url("/api/images/drop/{$imageRecord->id}")
                 ]);
