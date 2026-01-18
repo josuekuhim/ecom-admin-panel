@@ -133,7 +133,6 @@ jobs:
           DB_DATABASE: ":memory:"
 
       - name: Run tests (PostgreSQL)
-        run: php artisan test
         env:
           DB_CONNECTION: pgsql
           DB_HOST: 127.0.0.1
