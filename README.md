@@ -361,18 +361,6 @@ SLACK_WEBHOOK_URL          # (opcional) Notificações
 
 ---
 
-## 📖 Documentação
-
-| Documento | Descrição |
-|-----------|-----------|
-| [📋 API Reference](docs/api.md) | Endpoints, autenticação, exemplos |
-| [🏗️ Architecture](docs/architecture.md) | Decisões de design, patterns |
-| [🔒 Security](docs/security-hardening.md) | Hardening, best practices |
-| [🚀 Deployment](docs/deployment.md) | Deploy em produção |
-| [🧪 Testing](docs/testing.md) | Estratégia de testes |
-
----
-
 ## 🔧 Instalação Manual
 
 <details>
